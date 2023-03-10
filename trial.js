@@ -7,7 +7,7 @@ submit.addEventListener('click', function (e) {
     div.setAttribute('class', 'btns');
     var ele = document.createElement('li');
     ele.setAttribute('class', 'list-group-item');
-    ele.textContent = item.value;
+    ele.textContent = item.value+" "+document.querySelector("#description").value;
     document.querySelector('.list-group').appendChild(ele).appendChild(div);
     var btn = document.createElement('button');
     btn.setAttribute('class', 'btn btn-danger btn-sm delete');
@@ -25,4 +25,17 @@ items.addEventListener('click', function (e) {
     if (e.target.classList.contains('delete')) {
         e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
     }
+});
+var filter=document.querySelector('#filter');
+filter.addEventListener('keyup',function(e){
+    e.preventDefault();
+    var search=filter.value.toLowerCase();
+    var alltexts=document.querySelectorAll('.list-group-item');
+   var allInputs=Array.from(alltexts);
+   allInputs.forEach((eh)=>{
+   if(eh.firstChild.textContent.toLowerCase().indexOf(search)!=-1){
+        eh.style.display='block';
+   }
+   else eh.style.display='none';
+   });
 });
