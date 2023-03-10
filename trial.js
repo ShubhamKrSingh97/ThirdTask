@@ -1,21 +1,28 @@
-var par=document.querySelector('#items');
-par.parentElement.style.backgroundColor='red';
-var last=document.querySelector('.card-body');
-last.lastElementChild.style.color='blue';
-last.firstElementChild.style.color='blue';
-document.querySelector('.mb-3').nextElementSibling.style.color='green';
-var add=document.createElement('li');
-add.setAttribute('class','new-element');    
-add.textContent='New item';
-par.appendChild(add);
+var item = document.querySelector('#item');
+var items = document.querySelector('#items');
+var submit = document.querySelector('.btn-dark');
+submit.addEventListener('click', function (e) {
+    e.preventDefault();
+    var div = document.createElement('div');
+    div.setAttribute('class', 'btns');
+    var ele = document.createElement('li');
+    ele.setAttribute('class', 'list-group-item');
+    ele.textContent = item.value;
+    document.querySelector('.list-group').appendChild(ele).appendChild(div);
+    var btn = document.createElement('button');
+    btn.setAttribute('class', 'btn btn-danger btn-sm delete');
+    btn.textContent = 'X';
+    div.appendChild(btn);
+    var edit = document.createElement('button');
+    edit.setAttribute('class', 'edit btn btn-outline-primary');
+    edit.textContent = 'Edit';
+    div.insertBefore(edit, btn);
 
-var hello=document.querySelector('.container');
-var ad=document.createElement('li');
-ad.textContent='Hello World';
-var hi=document.querySelector('header h1');
-hello.insertBefore(ad,hi);
-var hey=document.querySelector('#items');
-var lol=document.querySelector('.list-group-item');
-hey.insertBefore(ad,lol);
+});
+items.addEventListener('click', function (e) {
+    e.preventDefault();
 
-
+    if (e.target.classList.contains('delete')) {
+        e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode);
+    }
+});
